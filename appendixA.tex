@@ -1,0 +1,623 @@
+%% Appendix A
+\section{SFA Model Specification}
+%\label{app:A}
+\noindent The within transformed SFA model \citep{Wang2010} used in this paper is described here. Consider an SFA model with the following general specifications$:$
+\begin{eqnarray}
+y_{it} & = &\alpha_{i}+\mathbf{x}_{nit}\boldsymbol\beta+\mathbf{\epsilon}_{it},
+\hspace{1em} i=1,\ldots,I,\hspace{1em}t=1,\ldots,T,\hspace{1em}n=1,\ldots,N
+\label{eqn:ineff1}\\
+\epsilon_{it} & = &v_{it} - u_{it},\\
+v_{it} &\sim& N(0,\sigma_{v}^{2}),\\
+u_{it} &=& h_{it}~.~\bar{u}_{i},\\
+h_{it} &=& f(\mathbf{z}_{kit}\mathbf{\delta}),\hspace{1em}k=1,\ldots,K\\
+\bar{u}_{i} &\sim& N^{+}(\mu,\sigma_{u}^{2}).\label{eqn:ineff6}
+\end{eqnarray}
+Here, $\mathbf{x}_{nit}$ is a vector of $N$ production factor variables (or explanatory variables in general) and $\alpha_{it}$ represents unobserved fixed effect corresponding to the $i^{th}$ firm. $v_{it}\sim N(0,\sigma_{v}^{2})$ is the noise component and $\bar{u}_{it}$ 
+is the nonnegative stochastic technical inefficiency component. While $\bar{u}_{it}$ is defined as a truncated normal distribution (Eq.\ref{eqn:ineff6}), in our model we set $\mu=0$ and assume a half-normal distribution for the inefficiency component. The vector $\mathbf{z}_{kit}$ represents $K$ exogenous variables determining inefficiency. 
+
+\section{Transformed Specification}
+The \emph{within transformation} is obtained by subtracting the sample mean of each panel
+from every individual observation in the panel. The transformation, by de-meaning, removes
+time-invariant fixed effects from the model. The model specification (Eq.\ref{eqn:ineff1}-\ref{eqn:ineff6}) post transformation may be represented as$:$
+
+\begin{eqnarray}
+\tilde{y}_{i*} & = &\mathbf{\tilde{x}}_{ni*}\boldsymbol\beta+\mathbf{\tilde{\epsilon}}_{i*},
+\label{eqn:tineff1}\\
+\tilde{\epsilon}_{i*} & = &\tilde{v}_{i*} - \tilde{u}_{i*},\\
+\tilde{v}_{i*} &\sim& \mathbf{N}(0,\Pi),\label{eqn:tineff3}\\
+\tilde{u}_{i*} &=& \tilde{h}_{i*}~.~\bar{u}_{i},\\
+\bar{u}_{i} &\sim& N^{+}(\mu,\sigma_{u}^{2}).\label{eqn:tineff5}
+\end{eqnarray}
+
+Here, we denote mean of individuals over the panel by $y_{i*} = (1/T)\Sigma^{T}_{t=1}y_{it}$, and the mean differenced value by $y_{it*}=y_{it}-y_{i*}$. The full panel as a vector stack is represented as
+
+$\tilde{y}_{i*} = (y_{i1},y_{i2},\ldots,y_{iT})'$. The variance-covariance matrix of $\tilde{v}_{i*}$ (Eqn. \ref{eqn:tineff3}) is
+\begin{equation}
+\label{eqn:mat}
+\Pi = \begin{bmatrix}
+\sigma^{2}_{v}(1-1/T) & \sigma^{2}_{v}(-1/T) &\cdots& \sigma^{2}_{v}(-1/T) \\
+\sigma^{2}_{v}(-1/T) & \sigma^{2}_{v}(1-1/T) &\cdots& \sigma^{2}_{v}(-1/T) \\
+\vdots & \vdots & \ddots & \vdots \\
+\sigma^{2}_{v}(-1/T) & \sigma^{2}_{v}(-1/T) &\cdots& \sigma^{2}_{v}(1-1/T) \\
+ \end{bmatrix} 
+\end{equation}
+\section{Log-Likelihood Function}
+For the model described above, \cite{Wang2010} derives the marginal log-likelihood function of the $i^{th}$ panel as follows, 
+\begin{equation}
+\label{eqn:loglik}
+\begin{split}
+ln~L_{i} &= -\frac{1}{2}(T-1)ln(2\pi)-\frac{1}{2}(T-1)ln(\sigma^{2}_{v})-\frac{1}{2}\tilde{\epsilon}_{i*}'\Pi^{-}\tilde{\epsilon}_{i*}+\frac{1}{2}\left(\frac{\mu^{2}_{1}}{\sigma^{2}_{1}}-\frac{\mu^{2}}{\sigma^{2}}\right)\\
+& +ln\left(\sigma_{1}\Phi\left(\frac{\mu_{1}}{\sigma_{1}}\right)\right) -ln\left(\sigma_{u}\Phi\left(\frac{\mu}{\sigma_{u}}\right)\right),
+\end{split}
+\end{equation}
+where $\Pi^{-}$ is the generalized inverse of $\Pi$, $\phi$ the normal density function, $\Phi$ the cumulative density function and, 
+\begin{equation}
+\mu_{1}=\frac{\mu/\sigma_{u}^{2}-\tilde{\epsilon}_{i*}'\Pi^{-}\tilde{h}_{i*}}{\tilde{h}_{i*}'\Pi^{-}\tilde{h}_{i*} + 1/\sigma^{2}_{u}},
+\end{equation}
+\begin{equation}
+\sigma_{1}^2=\frac{1}{\tilde{h}_{i*}'\Pi^{-}\tilde{h}_{i*} + 1/\sigma^{2}_{u}},
+\end{equation}
+\begin{equation}
+\tilde{\epsilon}_{i*}=\tilde{y}_{i*}-\mathbf{\tilde{x}}_{i*}\beta
+\end{equation}
+The log likelihood function of the model $L$ is obtained by summing the marginal likelihood over $i=1,\ldots,I$
+\begin{equation}
+L=\Sigma^{I}_{i=1}L_{i}
+\end{equation} 
+\section{Inefficiency and Fixed-Effect Estimation}
+The inefficiency index of observation/firm, $i$, during period, $t$, can be estimated as the expection of $u_{it}$ conditional on the model residue, $\tilde{\epsilon}_{i*}~:$
+\begin{equation}
+\label{eqn:inefind}
+E\left(u_{it}|\tilde{\epsilon}_{i*}\right)=h_{it}\left[\mu_{1}+\frac{\phi\left(\frac{\mu_{1}}{\sigma_1}\right)\sigma_{1}}{\Phi\left(\frac{\mu_{1}}{\sigma_1}\right)}\right]
+\end{equation}
+The fixed-effects, $\alpha_{i}$'s, can be recovered from the estimates of parameters obtained, 
+\begin{equation}
+\label{eq:fixeff}
+\hat{\alpha}_{i}=y_{i*}-\boldsymbol{x}_{i*}\boldsymbol{\hat{\beta}}+\hat{\mu}_{2}\hat{h}_{i*}+\hat{\sigma}_{2}\hat{h}_{i*}\frac{\phi\left(\frac{\hat{\mu}_{2}}{\hat{\sigma}_2}\right)}{\Phi\left(\frac{\hat{\mu}_{2}}{\hat{\sigma}_2}\right),}
+\end{equation}
+where
+\begin{equation}
+\hat{\mu}_{2}=\frac{\hat{\mu}\hat{\sigma}^{-2}_{u}-\hat{\sigma}^{-2T}_{v}\sum_{t}\hat{\epsilon}_{it}\hat{h}_{it}}{\hat{\sigma}^{-2T}_{v}\sum_{t}\hat{h}_{it}^{2}+\hat{\sigma}^{-2}_{u}}
+\end{equation}
+\begin{equation}
+\hat{\sigma}^{2}_{2}=\frac{\hat{\sigma}^{2T}_{v}}{\sum_{t}\hat{h}_{it}^{2}+\hat{\sigma}^{2T}_{v}\hat{\sigma}^{-2}_{u}}
+\end{equation}
+\section{R-Code}
+A routine, in the R-statistical language, is written to estimate the maximum likelihood function (Eq. \ref{eqn:loglik}). Additional routines computes inefficiency indices following Eq. \ref{eqn:inefind} and the firm fixed-effects following Eq. \ref{eq:fixeff}. The R-code is tested with STATA procedure and test data obtained from Hun-Jen Wang, as described in detail in \cite{Wang2010}. In addition Monte Carlo simulations are done to test the R-routine. The complete R-code is available freely from the authors on request. The function for MLE estimation of parameters is described in code listing \ref{Rcode1}. R functions for efficiency and firm fixed effects estimation is listed in \ref{Rcode2} and the function for numerical computation of the Hessian matrix of the estimated parameters for computing standard errors is listed in \ref{Rcode3}.
+\vskip 1cm
+
+\begin{lstlisting}[label=Rcode1, caption=R-Code for Maximum Likelihood Function]   
+##########################################################
+# Maximum Likelihood Estimation 
+# Within Transformed SFA Models
+# Version: v1.0
+# Author : Anish Sugathan
+# E-mail : anish.iimb@gmail.com 
+########################################################## 
+#The function sfa.within returns model parameters estimated
+#using the maximum-likelihood estimation technique.
+#Variable Definitions:
+#theta   		: vector of parameters to be estimated
+#data    		: R data.frame for the panel data 
+#out.var 		: the variable name of output variable
+#in.var  		: vector of input variable names
+#z.var   		: vector of ineff. explanatory variable names
+#id.var  		: variable name identifying individuals
+#t.var	 		: variable name identifying panel time
+#limitLH 		: len(theta)X2 matrix of parameter bounds
+#optMethod	: optimization method to be used
+#optControl	: list of optimization control parameters
+#halfnormal	: (logical) TRUE or FALSE     
+sfa.within<-function(theta,data, out.var, in.var, z.var, id.var, t.var,limitLH, optMethod,optControl,halfnorm=FALSE){
+  
+  #Compute total time periods for each firm
+  compNames<-unique(data[,id.var])
+  for(i in 1:length(compNames)){
+    years<-sort(data[data[,id.var]==compNames[i],t.var])
+    data$TP[data[,id.var]==compNames[i]]<-length(years)  
+    data$CompCode[data[,id.var]==compNames[i]]<-i
+  }  
+  data<-data[data$TP>=2,]
+  data<-data[order(data[,id.var],data[,t.var]),]
+  
+  #Compute delta and h_it
+  delta<-theta[(3+NCOL(data[,in.var])+1):(3+NCOL(data[,in.var])+NCOL(data[,z.var]))]
+  data$h_it<-exp(as.matrix(data[,z.var]) %*% delta)
+  
+  #Compute the mean subtracted values  
+  for(i in 1:length(compNames)){    
+    for(k in c(out.var,in.var,'h_it')){
+      data[data[,id.var]==compNames[i],paste('W_',k,sep='')]<-data[data[,id.var]==compNames[i],k]-mean(data[data[,id.var]==compNames[i],k])
+    }    
+  }
+  if(is.numeric(data[,t.var])){
+    select.vars<-c(t.var,'CompCode',out.var,in.var,z.var,'h_it','W_h_it','TP',paste('W_',out.var,sep=''),paste('W_',in.var,sep=''))
+  }else{
+    stop(paste(t.var,': is not numeric. Only numeric t.vars allowed'))
+  }
+  
+  datam<-as.matrix(data[,select.vars])
+  
+  CD<-datam[,'CompCode']
+  Y<-datam[,paste('W_',out.var,sep='')]  
+  X<-datam[,paste('W_',in.var,sep='')]
+  Z<-datam[,z.var]
+  TP<-datam[,'TP']
+  H_it<-datam[,'W_h_it']
+  S_H_it<-datam[,'h_it']
+    
+  #The Log Liklihood function (Wang and Ho,2010: p.288 Eq.13)
+  logLikFun<-function(theta,Y,X,Z,TP,CD){    
+    # Get parameters parsed from theta
+    #mu <- 0 # to get the Ui* to follow a half normal distribution
+    if(halfnorm==FALSE){
+      mu <-theta[1]  
+    }else{
+      mu <- 0
+    }    
+    sigma_u<-exp(0.5*theta[2])#theta[2]#
+    sigma_v<-exp(0.5*theta[3])#theta[3]#
+    beta<-theta[4:(3+NCOL(X))]
+    delta<-theta[(3+NCOL(X)+1):(3+NCOL(X)+NCOL(Z))]
+    
+    #function for repeated computation of liklihood for each panel
+    getLogLik<-function(tp,mu,sigma_v,sigma_u,y,x,z,w_h_it){      
+      epsi<- y - x %*% beta    
+      
+      PI<-(sigma_v^2)*(diag(tp)-rep(1/tp,tp))
+      PIi<-ginv(PI)      
+      
+      Aa<-t(epsi) %*% PIi %*% w_h_it
+      Bb<-t(w_h_it) %*% PIi %*% w_h_it + 1/sigma_u^2
+      Cc<-t(epsi) %*% PIi %*% epsi
+      
+      mu_star<-(mu/sigma_u^2 - Aa)/Bb
+      sigma2_star<-1/Bb
+      sigma_star<-sqrt(sigma2_star)      
+      
+      Dd<-((mu_star^2/sigma2_star)-(mu^2/sigma_u^2))
+      Ee<-log(sigma_star*pnorm(mu_star/sigma_star))
+      Ff<-log(sigma_u*pnorm(mu/sigma_u))
+      
+      logLikVal<- -0.5*(tp-1)*log(2*pi)-0.5*(tp-1)*log(sigma_v^2)-0.5*Cc+0.5*Dd+Ee-Ff        
+      return(logLikVal)       
+    }# end of function getLogLik
+       
+    logLikSum<-0
+    if(sigma_u >=0 & sigma_v >=0){
+      #if(ifelse(limitLH==NULL,sigma_u >=0 & sigma_v >=0,!sum(theta<limitLH[,1]) & !sum(theta>limitLH[,2]))){
+      codes<-unique(CD)      
+      logLikSum<-0        
+      for(cd in codes){
+        y<-Y[CD==cd]
+        x<-X[CD==cd,]
+        if(NCOL(Z)>=2){
+          z<-Z[CD==cd,]
+        }else{
+          z<-Z[CD==cd]
+        }
+        tp<-TP[CD==cd][1]
+        w_h_it<-exp(z %*% delta)
+        w_h_it<-w_h_it-mean(w_h_it)
+        logLikVal<- getLogLik(tp=tp,mu=mu,sigma_v=sigma_v,sigma_u=sigma_u,y=y,x=x,z=z,w_h_it=w_h_it)         
+        logLikSum<-logLikSum + logLikVal      
+      }      
+      if(optMethod=='BFGS' 
+         |optMethod=='nloptr'
+         |optMethod=='bobyqa'
+         |optMethod=='DEoptim'){
+        return(ifelse(is.na(logLikSum),1e20,-1*logLikSum))#for DEoptim        
+      }else{        
+        return(sum(logLikSum))
+      }      
+      }else{
+        if(!(optMethod=='DEoptim'))
+        {
+          return(NA)
+        }else{
+          return(1e20)
+        }
+      }         
+    }
+    #end of function LogLik
+  print('Data Processed..Optimization Call Start.')
+  switch(optMethod,
+         'genoud'={
+            opt <- genoud(logLikFun, nvars = length(theta),max=TRUE
+                         ,pop.size=5000,starting.values=theta
+                         ,default.domains=10
+                         ,hessian=FALSE,optim.method='BFGS'
+                         ,max.generations=10                         
+                         ,Y=Y,X=X,Z=Z,TP=TP,CD=CD)         
+           opt<-rename(opt,c(value='fval'))                    
+           },
+         'DEoptim'={
+           lb=rep(-5,length(theta)) 
+           ub=rep(+5,length(theta))
+           theta[1]<-0
+           maxit<-100
+           opt<- DEoptim(fn=logLikFun,lower=lb,upper=ub
+                         ,DEoptim.control(NP=20*length(theta)
+                                          ,F=1,itermax=maxit
+                                          ,p=0.2,strategy=6 ),Y=Y,X=X,Z=Z,TP=TP,CD=CD)
+         },
+         'nloptr'={
+           lb=c(0,rep(-10,length(theta)-1))
+           ub=c(0,rep(+10,length(theta)-1))
+           theta[1]<-0
+           options<-list(algorithm="NLOPT_GN_CRS2_LM"
+                         ,check_derivatives = FALSE
+                         ,check_derivatives_print = "none"
+                         ,print_level=2
+                         ,maxeval=1000                         
+                         )
+           opt <- nloptr(x0=theta
+                         ,eval_f=logLikFun
+                         ,eval_grad_f=NULL
+                         ,eval_g_ineq=NULL
+                         ,eval_jac_g_ineq=NULL
+                         ,eval_g_eq=NULL
+                         ,eval_jac_g_eq=NULL
+                         ,lb=lb
+                         ,ub=ub
+                         ,opts<-options
+                         ,Y=Y,X=X,Z=Z,TP=TP,CD=CD)
+           },         
+           'bobyqa'={
+             lb=c(0,rep(-10,length(theta)-1)) 
+             ub=c(1e-1,rep(+10,length(theta)-1))
+             theta[1]<-0
+             ctrl=list(npt=length(theta)*2+1
+                       ,rhobeg=1e-1
+                       ,rhoend=1e-6
+                       ,iprint=2
+                       ,maxfun=optControl$maxit
+                       ,boundary.enforcement=1)
+             opt<-bobyqa(theta,logLikFun,lower=lb,upper=ub
+                         ,control=ctrl
+                         ,Y=Y,X=X,Z=Z,TP=TP,CD=CD)
+           },
+           'defalut'={
+             print('Optimization Done!')
+           }
+  )
+  return(list(optim=opt))          
+}
+#end of main function sfa.within
+
+\end{lstlisting}
+
+
+\begin{lstlisting}[label=Rcode2, caption=R-Code for Efficiency and Fixed Effects Estimation]   
+##########################################################
+# Efficiency and Fixed Effects Estimation of
+# Within Transformed SFA Models
+# Version: v1.0
+# Author : Anish Sugathan
+# E-mail : anish.iimb@gmail.com 
+########################################################## 
+#The function sfa.within.eff returns estimated
+#Inefficiency scores and firm fixed effects
+#Variable Definitions:
+#theta   		: vector of parameters to be estimated
+#data    		: R data.frame for the panel data 
+#out.var 		: the variable name of output variable
+#in.var  		: vector of input variable names
+#z.var   		: vector of ineff. explanatory variable names
+#id.var  		: variable name identifying individuals
+#t.var	 		: variable name identifying panel time
+#limitLH 		: len(theta)X2 matrix of parameter bounds
+#optMethod	: optimization method to be used
+#optControl	: list of optimization control parameters
+#halfnormal	: (logical) TRUE or FALSE     
+
+sfa.within.eff<-function(theta,data, out.var, in.var, z.var, id.var, t.var, halfnorm=TRUE){
+  
+  #Compute total time periods for each firm
+  compNames<-unique(data[,id.var])
+  for(i in 1:length(compNames)){
+    years<-sort(data[data[,id.var]==compNames[i],t.var])
+    data$TP[data[,id.var]==compNames[i]]<-length(years)  
+    data$CompCode[data[,id.var]==compNames[i]]<-i
+  }  
+  data<-data[data$TP>=2,]
+  data<-data[order(data[,id.var],data[,t.var]),]
+  
+  #Compute delta and h_it
+  delta<-theta[(3+NCOL(data[,in.var])+1):(3+NCOL(data[,in.var])+NCOL(data[,z.var]))]
+  data$h_it<-exp(as.matrix(data[,z.var]) %*% delta)  
+  
+  #Compute the mean subtracted values  
+  for(i in 1:length(compNames)){    
+    for(k in c(out.var,in.var,'h_it')){
+      data[data[,id.var]==compNames[i],paste('W_',k,sep='')]<-data[data[,id.var]==compNames[i],k]-mean(data[data[,id.var]==compNames[i],k])
+    }    
+  }
+  if(is.numeric(data[,t.var])){
+    select.vars<-c(t.var,'CompCode',out.var,in.var,z.var,'h_it','W_h_it','TP',paste('W_',out.var,sep=''),paste('W_',in.var,sep=''))
+  }else{
+    stop(paste(t.var,': is not numeric. Only numeric t.vars allowed'))
+  }
+  
+  datam<-as.matrix(data[,select.vars])
+  #datam<-as.matrix(data[,select.vars])
+  #datam<-datam[datam[,'FirstYear']==0,]
+  
+  CD<-datam[,'CompCode']
+  Y<-datam[,paste('W_',out.var,sep='')]  
+  X<-datam[,paste('W_',in.var,sep='')]
+  Z<-datam[,z.var]
+  TP<-datam[,'TP']
+  H_it<-datam[,'W_h_it']
+  S_H_it<-datam[,'h_it']  
+
+    getEfficiency<-function(theta,Y,X,Z,TP,FY,CD){    
+    ### function for repeated computation parameters for each panel
+    getPar<-function(tp,mu,sigma_v,sigma_u,y,x,z,w_h_it,s_h_it){      
+      epsi<- y - x %*% beta    
+      
+      PI<-(sigma_v^2)*(diag(tp)-rep(1/tp,tp))
+      PIi<-ginv(PI)      
+      
+      Aa<-t(epsi) %*% PIi %*% w_h_it
+      Bb<-t(w_h_it) %*% PIi %*% w_h_it + 1/sigma_u^2
+      Cc<-t(epsi) %*% PIi %*% epsi
+      
+      mu_star<-(mu/sigma_u^2 - Aa)/Bb
+      sigma2_star<-1/Bb
+      sigma_star<-sqrt(sigma2_star)      
+      
+      ## Recover Individual Fixed Effects
+      Dd <- mu/sigma_u^2 - (1/sigma_v^(2*(tp)))*sum(epsi*s_h_it) 
+      Ee <- (1/sigma_v^(2*(tp)))*sum(s_h_it^2) + 1/sigma_u^2
+      Ff <- sum(s_h_it^2) + sigma_v^(2*(tp))/sigma_u^2
+      mu_starry<-Dd/Ee
+      sigma2_starry<-sigma_v^(2*(tp))/Ff
+      sigma_starry<-sqrt(sigma2_starry)
+      
+      y_dot <- mean(y)
+      x_dot <- apply(x,2,mean)
+      h_dot <- mean(s_h_it)
+      
+      # a small empsilon = 1e-20 is added to avoid NANs
+      Gg<-(dnorm(mu_starry/sigma_starry)+1e-20)/(pnorm(mu_starry/sigma_starry)+1e-20)
+      
+      alph <- y_dot - x_dot %*% beta + mu_starry*h_dot + sigma_starry*h_dot*(Gg) 
+      
+      return(cbind(mu_star,sigma_star,mu_starry,sigma_starry,alph))       
+    }# end of function getPar
+    
+    # Get parameters parsed from theta    
+    if(halfnorm==FALSE){
+      mu <-theta[1] 
+    }else{
+      mu <- 0
+    }    
+    sigma_u<-exp(0.5*theta[2])#theta[2]#
+    sigma_v<-exp(0.5*theta[3])#theta[3]#
+    beta<-theta[4:(3+NCOL(X))]
+    delta<-theta[(3+NCOL(X)+1):(3+NCOL(X)+NCOL(Z))]
+    
+    codes<-unique(CD)
+    CD_h_it<-cbind(CD,0)
+    CDPar<-matrix(nrow=length(codes),ncol=6)
+    i<-1
+    for(cd in codes){
+      y<-Y[CD==cd]
+      x<-X[CD==cd,]
+      if(NCOL(Z)>=2){
+        z<-Z[CD==cd,]
+      }else{
+        z<-Z[CD==cd]
+      }
+      tp<-TP[CD==cd][1]
+      #w_h_it<-H_it[CD==cd]
+      #s_h_it<-S_H_it[CD==cd]
+      s_h_it<-exp(z %*% delta)
+      w_h_it<-s_h_it-mean(s_h_it)
+      CD_h_it[CD==cd,2]<-s_h_it###<check this      
+      
+      #getPar(tp,mu,sigma_v,sigma_u,y,x,z,w_h_it,s_h_it)
+      
+      CDPar[i,1]<-cd
+      CDPar[i,2]<-getPar(tp,mu,sigma_v,sigma_u,y,x,z,w_h_it,s_h_it)[1]#mu_star
+      CDPar[i,3]<-getPar(tp,mu,sigma_v,sigma_u,y,x,z,w_h_it,s_h_it)[2]#sigma_star
+      CDPar[i,4]<-getPar(tp,mu,sigma_v,sigma_u,y,x,z,w_h_it,s_h_it)[3]#mu_starry
+      CDPar[i,5]<-getPar(tp,mu,sigma_v,sigma_u,y,x,z,w_h_it,s_h_it)[4]#sigma_starry
+      CDPar[i,6]<-getPar(tp,mu,sigma_v,sigma_u,y,x,z,w_h_it,s_h_it)[5]#alph
+      i<-i+1
+    }
+    CD_h_it<-cbind(CD_h_it,NA,NA,NA,NA,NA)
+    for(cd in codes){
+      CD_h_it[CD_h_it[,1]==cd,3]<-CDPar[CDPar[,1]==cd,2]#mu_star
+      CD_h_it[CD_h_it[,1]==cd,4]<-CDPar[CDPar[,1]==cd,3]#sigma_star
+      CD_h_it[CD_h_it[,1]==cd,5]<-CDPar[CDPar[,1]==cd,4]#mu_starry
+      CD_h_it[CD_h_it[,1]==cd,6]<-CDPar[CDPar[,1]==cd,5]#sigma_starry
+      CD_h_it[CD_h_it[,1]==cd,7]<-CDPar[CDPar[,1]==cd,6]#alph
+    }
+    InEff<-CD_h_it[,2]*(CD_h_it[,3] + (dnorm(CD_h_it[,3]/CD_h_it[,4])*CD_h_it[,4])/pnorm(CD_h_it[,3]/CD_h_it[,4]))
+    TEff<-exp(-InEff)
+    CD_h_it<-cbind(CD_h_it,InEff,TEff)      
+    return(CD_h_it)    
+  }# end of getEfficiency   
+  
+Eff<-getEfficiency(theta,Y,X,Z,TP,FY,CD) 
+datam<-cbind(datam,Eff[,-1])
+  dimnames(datam)[2]<-list(c(select.vars,"h_it","mu_s","sig_s","mu_ss","sig_ss","alph","InEff_u","TEff"))
+  dataf<-merge(data[,c('Year','CompanyName','CompCode')],data.frame(datam),by=c('Year','CompCode'))
+  return(dataf)  
+}
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[label=Rcode3, caption=R-Code for Numerical Estimation of Hessian Matrix]   
+##########################################################
+# Numerical Hessian Matrix for Parameter Estimates of
+# Within Transformed SFA Models
+# Version: v1.0
+# Author : Anish Sugathan
+# E-mail : anish.iimb@gmail.com 
+########################################################## 
+#The function sfa.within.hessian returns estimated
+#numerical hessian for standard error computation
+#Variable Definitions:
+#theta   		: vector of parameters to be estimated
+#data    		: R data.frame for the panel data 
+#out.var 		: the variable name of output variable
+#in.var  		: vector of input variable names
+#z.var   		: vector of ineff. explanatory variable names
+#id.var  		: variable name identifying individuals
+#t.var	 		: variable name identifying panel time
+#limitLH 		: len(theta)X2 matrix of parameter bounds
+#optMethod	: optimization method to be used
+#optControl	: list of optimization control parameters
+#halfnormal	: (logical) TRUE or FALSE     
+
+sfa.within.hessian<-function(theta,data, out.var, in.var, z.var, id.var, t.var, halfnorm=TRUE,onlyLogLik){
+  
+  #theta such that (mu, sigma_u, sigma_v, beta, delta)
+  #theta<-c(0,1,1,rep(0,length(in.var)+length(z.var)))
+  print('Preparing Data...')
+  ## Prepare the data object for fast iterations
+  
+  #Compute total time periods for each firm
+  compNames<-unique(data[,id.var])
+  for(i in 1:length(compNames)){
+    years<-sort(data[data[,id.var]==compNames[i],t.var])
+    data$TP[data[,id.var]==compNames[i]]<-length(years)  
+    data$CompCode[data[,id.var]==compNames[i]]<-i
+  }  
+  
+  data<-data[data$TP>=2,]
+  data<-data[order(data[,id.var],data[,t.var]),]
+  
+  #Compute delta and h_it
+  delta<-theta[(3+NCOL(data[,in.var])+1):(3+NCOL(data[,in.var])+NCOL(data[,z.var]))]
+  data$h_it<-exp(as.matrix(data[,z.var]) %*% delta)  
+  
+  #Compute the mean subtracted values  
+  for(i in 1:length(compNames)){    
+    for(k in c(out.var,in.var,'h_it')){
+      #print(k)
+      data[data[,id.var]==compNames[i],paste('W_',k,sep='')]<-data[data[,id.var]==compNames[i],k]-mean(data[data[,id.var]==compNames[i],k])
+    }    
+  }
+  if(is.numeric(data[,t.var])){
+    select.vars<-c(t.var,'CompCode',out.var,in.var,z.var,'h_it','W_h_it','TP',paste('W_',out.var,sep=''),paste('W_',in.var,sep=''))
+  }else{
+    stop(paste(t.var,': is not numeric. Only numeric t.vars allowed'))
+  }
+  
+  datam<-as.matrix(data[,select.vars])
+  #datam<-as.matrix(data[,select.vars])
+  #datam<-datam[datam[,'FirstYear']==0,]
+  
+  CD<-datam[,'CompCode']
+  Y<-datam[,paste('W_',out.var,sep='')]  
+  X<-datam[,paste('W_',in.var,sep='')]
+  Z<-datam[,z.var]
+  TP<-datam[,'TP']
+  H_it<-datam[,'W_h_it']
+  S_H_it<-datam[,'h_it']
+  
+  
+  ################# The Log Liklihood function of Wang and Ho (2010, p.288 Eq.13)
+  logLikFun<-function(theta,Y,X,Z,TP,FY,CD){
+    
+    #print(theta)
+    # Get parameters parsed from theta
+    #mu <- 0 # to get the Ui* to follow a half normal distribution
+    if(halfnorm==FALSE){
+      mu <-theta[1]  
+    }else{
+      mu <- 0
+    }
+    #print(Y)
+    sigma_u<-exp(0.5*theta[2])#theta[2]#
+    sigma_v<-exp(0.5*theta[3])#theta[3]#
+    beta<-theta[4:(3+NCOL(X))]
+    delta<-theta[(3+NCOL(X)+1):(3+NCOL(X)+NCOL(Z))]
+    
+    ### function for repeated computation of liklihood for each panel
+    getLogLik<-function(tp,mu,sigma_v,sigma_u,y,x,z,w_h_it){      
+      epsi<- y - x %*% beta    
+      
+      PI<-(sigma_v^2)*(diag(tp)-rep(1/tp,tp))
+      PIi<-ginv(PI)      
+      
+      Aa<-t(epsi) %*% PIi %*% w_h_it
+      Bb<-t(w_h_it) %*% PIi %*% w_h_it + 1/sigma_u^2
+      Cc<-t(epsi) %*% PIi %*% epsi
+      
+      mu_star<-(mu/sigma_u^2 - Aa)/Bb
+      sigma2_star<-1/Bb
+      sigma_star<-sqrt(sigma2_star)      
+      
+      Dd<-((mu_star^2/sigma2_star)-(mu^2/sigma_u^2))
+      Ee<-log(sigma_star*pnorm(mu_star/sigma_star))
+      Ff<-log(sigma_u*pnorm(mu/sigma_u))
+      
+      logLikVal<- -0.5*(tp-1)*log(2*pi)-0.5*(tp-1)*log(sigma_v^2)-0.5*Cc+0.5*Dd+Ee-Ff        
+      return(logLikVal)       
+    }# end of function getLogLik    
+    
+    logLikSum<-0
+    if(sigma_u >=0 & sigma_v >=0){
+      #if(ifelse(limitLH==NULL,sigma_u >=0 & sigma_v >=0,!sum(theta<limitLH[,1]) & !sum(theta>limitLH[,2]))){
+      #print('Started Computing...')
+      
+      codes<-unique(CD)
+      
+      logLikSum<-0        
+      for(cd in codes){
+        y<-Y[CD==cd]
+        x<-X[CD==cd,]
+        if(NCOL(Z)>=2){
+          z<-Z[CD==cd,]
+        }else{
+          z<-Z[CD==cd]
+        }
+        tp<-TP[CD==cd][1]
+        w_h_it<-exp(z %*% delta)
+        w_h_it<-w_h_it-mean(w_h_it)
+        #w_h_it<-H_it[CD==cd] ## big time bug!!!
+        
+        logLikVal<- getLogLik(tp=tp,mu=mu,sigma_v=sigma_v,sigma_u=sigma_u,y=y,x=x,z=z,w_h_it=w_h_it)         
+        #print(logLikVal)
+        logLikSum<-logLikSum + logLikVal      
+      }      
+      
+      #print(sum(logLikSum))
+      
+      return(sum(logLikSum))
+      
+      }else{
+        return(NA)       
+      }         
+    }# end of function LogLik  
+  
+  if(onlyLogLik==FALSE){
+  print('Data prepared....Computing Hessian...')  
+  Hess<-numDeriv::hessian(logLikFun,x=theta,method="Richardson",Y=Y,X=X,Z=Z,TP=TP,FY=FY,CD=CD)
+  LogLik<-logLikFun(theta,Y=Y,X=X,Z=Z,TP=TP,FY=FY,CD=CD)
+  #print('Done...!')
+  return(list(hessian=Hess,logLikVal=LogLik))    
+  }else{
+    LogLik<-logLikFun(theta,Y=Y,X=X,Z=Z,TP=TP,FY=FY,CD=CD)
+    #print(LogLik)
+    #print('Done...!')
+    return(list(logLik=LogLik))    
+  }
+}#### end of main function sfa.within.hessian
+
+\end{lstlisting}
+
+
+
+
+\bibliographystyle{apalike} 
+\singlespacing
+\bibliography{chap02refs}
+\doublespacing

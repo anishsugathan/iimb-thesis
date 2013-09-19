@@ -1,0 +1,110 @@
+%IntrochartChart
+
+\tikzstyle{decision} = [ellipse, draw, fill=blue!10,
+    text width=7em, text badly centered, node distance=2.5cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=gray!5,
+    text width=12em , text centered
+    , rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, very thick, color=black!50, -latex']
+\tikzstyle{bline} = [draw, bend right=15, very thick, color=black!50, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=gray!5, node distance=2.5cm,
+    minimum height=2em]
+    
+\begin{figure}[ht!]
+\centering
+\caption[Theoretical Positioning of the Dissertation]{Theoretical Positioning of the Dissertation\footnotemark}
+\label{fig:position}
+\vskip 0.75em
+\scalebox{0.80}{
+\begin{tikzpicture}[scale=0.8, node distance=2cm, auto]
+    % Place nodes
+\node [block] 
+	(econ) 
+	{\textbf{Economics}};
+	
+\node [block, left of=econ,node distance=6cm, align=left,inner sep=5pt]
+	(ortho)
+	{\textbf{Science of Choice}\\Scarcity \&\\ Resource Allocation.};
+	
+\node [block, below of=econ, node distance=3cm] 
+	(contract)
+	{\textbf{Science of Contract}\\New-Institutional Economics};
+	
+\node [block, left of=contract, node distance=6cm] 
+	(public)
+	{\textbf{Public Ordering}:\\Constitutional Economics};    
+	
+\node [block, below of=contract, node distance=3cm] 
+	(private)
+	{\textbf{Private Ordering}\\Theory of the Firm};  
+
+\node [block, below left of=private, node distance=5cm, xshift=-10mm] 
+	(expost)
+	{\textbf{Ex Post\\Governance}\\
+	 };  
+
+\node [block, below right of=private, node distance=5cm, xshift=10mm] 
+	(exante)
+	{\textbf{Ex Ante\\Incentive Alignment}\\};  
+	
+\node [block, below of=expost, node distance=3cm, fill=blue!10] 
+	(essay1)
+	{\textbf{Essay-I}\\
+	 };  
+	
+\node [block, below of=exante, node distance=3cm, fill=blue!10] 
+	(essay2)
+	{\textbf{Essay-II \& III}\\
+	 };  
+
+\node [block, below of=essay1, text width=15em, node distance=5.9cm, align=left] 
+	(ess1desc)
+	{\emph{\textbf{Research Question}}\vspace{0.5em}\\
+	
+	 How does macro institutions of economic governance
+	 influence conflicting interests of multiple stakeholders
+	 of the firm that is central to effective corporate governance?\vspace{0.5em}\\
+	 
+	 \emph{\textbf{Empirical Context}}\vspace{0.5em}\\
+	 International profit shifting by foreign owned firms operating 
+	 in a high-tax developing economy host-country (India).};  
+
+\node [block, below of=essay2, text width=15em, node distance=6cm, align=left] 
+	(ess2desc)
+	{\emph{\textbf{Research Question}}\vspace{0.5em}\\
+	
+	 In the event of opportunities arising from exogenous
+	 change in institutions, how does incentive structures governed
+	 by ownership, position in value-chain and market structure 
+	 influence changes in the firm's productivity in response.\vspace{0.5em}\\
+	 
+	 \emph{\textbf{Empirical Context}}\vspace{0.5em}\\	 
+	 Regulatory reforms, including un-bundling, in the Indian power sector}; 
+	
+    
+    % Draw edges
+     \path [line] (econ) -- (ortho);
+     \path [line] (econ) -- (contract);
+     \path [line] (contract) -- (public);
+     \path [line] (contract) -- (private);
+     \path [line] (private) -- (expost);
+     \path [line] (private) -- (exante);
+     \path [line] (expost) -- (essay1);
+     \path [line] (exante) -- (essay2);
+     \path [line] (essay1) -- (ess1desc);
+     \path [line] (essay2) -- (ess2desc);
+%     \path [line] (comp) -- (model);
+%     \path [line] (model) -- (comp);
+%     \path [line] (data) -- (comp);     
+%     \draw [very thick, color=black!50, -latex'] (experiment) to [bend right=10] (para);
+%     \draw [very thick, color=black!50, -latex'] (para) to [bend right=10] (experiment);
+%     \path [line] (identify) -- (experiment);
+%     \path [line] (experiment) -- (guide);
+%     
+%    \path [line] (decide) -| node [near start, color=black] {yes} (update);
+%    \path [line] (decide) -- node [, color=black] {no}(stop);
+\end{tikzpicture}
+}
+\end{figure}
+%
+\footnotetext{Adopted from \cite{Williamson2005}}
