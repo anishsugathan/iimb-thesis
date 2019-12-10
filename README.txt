@@ -10,12 +10,12 @@
 
 Latex class file to use: iimbthesis.cls
 
-This temaplate the FPM office requirements (esp. the title pages) as on
-2013 when I submitted my thesis. 
+This temaplate meets the FPM office requirements (esp. the title pages) as on
+2013 when I submitted PhD thesis. 
 
 All the files necessary to get the pdf output up and running are included 
-in the folder. All one has to do on a windows pc would be to 
-execute the "CompilePDF.bat" file and your pdf thesis should be ready.
+in the folder. Execute the "CompilePDF.bat" file on a windows PC to
+compile a PDF file.
 
 Make sure you set you latex(MIktex) to autodownload missing packages
 on the go (you need to be connected to net while complining) 
